@@ -1,4 +1,4 @@
-ECoG_preproc
+katja
 ============
 
 Wagner Lab preprocessing pipeline for ECoG data. 
