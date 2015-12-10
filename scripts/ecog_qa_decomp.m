@@ -54,22 +54,26 @@ function ecog_qa_decomp(data, art, params, label)
         
         % subset of the data
         sbst = data(iChan, floor((size(data, 2)) / 2) - 500 : floor((size(data, 2) / 2)) + 500);
+        x = (1:size(sbst, 2)) * (1000 / params.recording.samp_rate); % make x axis reflect ms rather than samples
         
         subplot(2, 3, 4)
-        plot(real(sbst));
-        set(gca, 'XLim', [0 size(sbst, 2)]);
+        plot(x, real(sbst));
+        set(gca, 'XLim', [0 max(x)]);
         title('filtered (real)');
+        xlabel('ms');
         
         subplot(2, 3, 5)
-        plot(abs(sbst));
-        set(gca, 'XLim', [0 size(sbst, 2)]);
+        plot(x, abs(sbst));
+        set(gca, 'XLim', [0 max(x)]);
         title('amplitude (abs)');
+        xlabel('ms');
         
         
         subplot(2, 3, 6)
-        plot(angle(sbst));
-        set(gca, 'XLim', [0 size(sbst, 2)]);
+        plot(x, angle(sbst));
+        set(gca, 'XLim', [0 max(x)]);
         title('phase (angle)');
+        xlabel('ms');
         
         saveas(h, fullfile(params.dir.fig, label, sprintf('%s_chan%02d_%s.png', params.blocks.thisblock, iChan, label)), 'png');
         close(h)        
